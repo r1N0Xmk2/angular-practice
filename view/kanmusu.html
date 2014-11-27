@@ -1,0 +1,43 @@
+<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th>舰名</th>
+			<th class="text-center">艦種</th>
+			<th class="text-center">改造</th>
+			<th class="text-center">耐久</th>
+			<th class="text-center">装甲</th>
+			<th class="text-center">火力</th>
+			<th class="text-center">雷装</th>
+			<th class="text-center">对空</th>
+			<th class="text-center">运</th>
+			<th class="text-center">射程</th>
+			<th class="text-center">速力</th>
+			<th class="text-center">最大搭载数</th>
+			<th class="text-center">燃弹值</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="kan in kans | filter:'!なし' | orderBy:'api_stype'" data-show="kan.api_afterlv|isEqualTo:0">
+			<td>{{kan.api_name}}/{{kan.api_yomi}}</td>
+			<td class="text-center">{{kan.api_stype | stype}}</td>
+			<td class="text-center">{{kan.api_afterlv}}</td>
+			<td class="text-center">{{kan.api_taik[1]}}</td>
+			<td class="text-center">{{kan.api_souk[1]}}</td>
+			<td class="text-center">{{kan.api_houg[1]}}</td>
+			<td class="text-center">{{kan.api_raig[1]}}</td>
+			<td class="text-center">{{kan.api_tyku[1]}}</td>
+			<td class="text-center">{{kan.api_luck.join('/')}}</td>
+			<td class="text-center">{{kan.api_leng}}</td>
+			<td class="text-center">{{kan.api_soku | soku}}</td>
+			<td class="text-center">{{kan.api_maxeq | maxeq}}</td>
+			<td class="text-center">{{kan.api_fuel_max}}/{{kan.api_bull_max}}</td>
+        <!-- ['运', 'api_luck', 35],
+        ['射程', 'api_leng', 31],
+        ['速力', 'api_soku', 31],
+        ['最大搭载数', 'api_maxeq', 70],
+        ['燃弹值', 'api_maxeq', 40],
+        ['最低配方', 'api_broken', 90],
+        ['建造时间', 'api_buildtime', 45] -->
+		</tr>
+	</tbody>
+</table>
