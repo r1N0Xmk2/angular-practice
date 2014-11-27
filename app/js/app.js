@@ -14,43 +14,50 @@ myApp
 	}])
 	.controller('enseiCtrl', ['$scope', 'getJson', function($scope, getJson) {
 		$scope.perHour = false;
-		getJson.fetch('ensei.json').then(function(data) {
-			console.log(data);
-			$scope.esh = 1
-			$scope.ensei = data;
-			enseiOp = [];
-			$scope.ensei.forEach(function(item,i) {
-				enseiOp.push(item.id);
-				var times = item.time.split(':');
-				var min = (Number(times[0]) * 60 + Number(times[1]))/60;
-				item.regardph = JSON.parse(JSON.stringify(item.regard));
-				item.regardph[1] -= item.cost[2]; 
-				item.regardph[2] -= item.cost[3];
-				item.regardph=item.regardph.map(function(ele) {
-					return ele / min;
-				}) 
-			})
-			$scope.predicate = '-id'
-			$scope.ensei1 = enseiOp.map(function(e) {return e})
-			$scope.ensei2 = enseiOp.map(function(e) {return e})
-			$scope.ensei3 = enseiOp.map(function(e) {return e})
-			// $scope.totalF = $scope.totalA = $scope.totalS = $scope.totalB = 0;
-			console.log('es1',$scope.es1)
-			
-			$scope.total = [0,0,0,0,0];
-			function esph(object, type, time) {
+		$scope.dskt = $scope.dsk==true?1.5:1;
+		function esph(object, type, time) {
 				var get = object.regard[type] * time;
 				var cost = type == 1 || type == 2?object.cost[type+1]:0
 				var times = object.time.split(':');
 				var min = (Number(times[0]) * 60 + Number(times[1]))/60;
 				return (get-cost)/min
-			}
+			};
+		function calph() {
+			enseiOp = [];
+			$scope.ensei.forEach(function(item,index) {
+				item.regardph = JSON.parse(JSON.stringify(item.regard));
+				console.log('calph',$scope.dskt)
+				item.regardph=item.regardph.map(function(e, i) {
+					return esph(item, i, $scope.dskt)
+				}) 
+			})
+		};
+		$scope.applys = function() {
+			$scope.dskt = $scope.dsk==true?1.5:1;
+			calph();
+		}
+		getJson.fetch('ensei.json').then(function(data) {
+			$scope.esh = 1
+			$scope.ensei = data;
+			var enseiOp = [];
+			$scope.ensei.forEach(function(item,index) {
+					enseiOp.push(item.id);
+			})
+			calph();
+			$scope.predicate = 'id';
+			$scope.ensei1 = enseiOp.map(function(e) {return e});
+			$scope.ensei2 = enseiOp.map(function(e) {return e});
+			$scope.ensei3 = enseiOp.map(function(e) {return e});
+			// $scope.totalF = $scope.totalA = $scope.totalS = $scope.totalB = 0;
+			$scope.total = [0,0,0,0,0];
 			$scope.calget = function() {
 				x = enseiOp.indexOf($scope.es1);
 				y = enseiOp.indexOf($scope.es2);
 				z = enseiOp.indexOf($scope.es3);
 				$scope.total = $scope.total.map(function(e,i) {
-					return ($scope.esh)*((x == -1 ?0:esph($scope.ensei[x], i, 1)) +(y == -1 ?0:esph($scope.ensei[y], i, 1)) +(z == -1 ?0:esph($scope.ensei[z], i, 1)))
+					return ($scope.esh)*((x == -1 ?0:esph($scope.ensei[x], i, $scope.esd1?1.5:1)) 
+															+(y == -1 ?0:esph($scope.ensei[y], i, $scope.esd2?1.5:1)) 
+															+(z == -1 ?0:esph($scope.ensei[z], i, $scope.esd3?1.5:1)))
 				})
 			}
 		})

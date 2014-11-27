@@ -2,32 +2,40 @@
   .w90 {
     width: 10vw;
   }
+  .hand {
+    cursor: pointer;
+  }
 </style>
-<h1>hello world!</h1>
-<button ng-click="perHour=!perHour">data per hour : {{perHour}}</button>
 <table class="table">
   <thead>
     <tr>
       <th class="w90">2</th>
       <th class="w90">3</th>
       <th class="w90">4</th>
-      <th>Hour</th>
-      <th class="w90">Fuel</th>
-      <th class="w90">Ammo</th>
-      <th class="w90">Steel</th>
-      <th class="w90">Bauxite</th>
+      <th>時間</th>
+      <th class="w90">燃料</th>
+      <th class="w90">弾薬</th>
+      <th class="w90">鋼材</th>
+      <th class="w90">ボーキ</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td class="np">
-        <select class="form-control w90" name="en1" ng-model="es1" ng-options="e1 for e1 in ensei1" ng-change="calget()"></select>
+        <div class="form-group form-inline">
+          <select class="form-control" name="en1" ng-model="es1" ng-options="e1 for e1 in ensei1" ng-change="calget()"></select><label for="dsk1">大成功</label><input id="dsk1" type="checkbox" class="form-control" ng-model="esd1" ng-change="calget()">
+        </div>
+        
       </td>
       <td class="np">
-        <select class="form-control w90" name="en2" ng-model="es2" ng-options="e2 for e2 in ensei2" ng-change="calget()"></select>
+        <div class="form-group form-inline">
+          <select class="form-control" name="en2" ng-model="es2" ng-options="e2 for e2 in ensei2" ng-change="calget()"></select><label for="dsk2">大成功</label><input id="dsk2" type="checkbox" class="form-control" ng-model="esd2" ng-change="calget()">
+        </div>
       </td>
       <td class="np">
-        <select class="form-control w90" name="en3" ng-model="es3" ng-options="e3 for e3 in ensei3" ng-change="calget()"></select>
+        <div class="form-group form-inline">
+          <select class="form-control" name="en3" ng-model="es3" ng-options="e3 for e3 in ensei3" ng-change="calget()"></select><label for="dsk3">大成功</label><input id="dsk3" type="checkbox" class="form-control" ng-model="esd3" ng-change="calget()">
+        </div>
       </td>
       <td class="np"><input type="number" class="form-control" style="width:60px" ng-model="esh" ng-change="calget()"></td>
       <td>{{total[1]|number:2}}</td>
@@ -42,19 +50,21 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th ng-click="reverse=!reverse;predicate='-id'">ID</th>
-      <th>Name</th>
-      <th>Time</th>
-      <th class="w90" ng-hide="perHour" ng-click="reverse=!reverse;predicate='-regard[0]'">Exp</th>
-      <th class="w90" ng-hide="perHour" ng-click="reverse=!reverse;predicate='-regard[1]'">Fuel</th>
-      <th class="w90" ng-hide="perHour" ng-click="reverse=!reverse;predicate='-regard[2]'">Ammo</th>
-      <th class="w90" ng-hide="perHour" ng-click="reverse=!reverse;predicate='-regard[3]'">Steel</th>
-      <th class="w90" ng-hide="perHour" ng-click="reverse=!reverse;predicate='-regard[4]'">Bauxite</th>
-      <th class="w90" ng-show="perHour" ng-click="reverse=!reverse;predicate='-regardph[0]'">Exp</th>
-      <th class="w90" ng-show="perHour" ng-click="reverse=!reverse;predicate='-regardph[1]'">Fuel</th>
-      <th class="w90" ng-show="perHour" ng-click="reverse=!reverse;predicate='-regardph[2]'">Ammo</th>
-      <th class="w90" ng-show="perHour" ng-click="reverse=!reverse;predicate='-regardph[3]'">Steel</th>
-      <th class="w90" ng-show="perHour" ng-click="reverse=!reverse;predicate='-regardph[4]'">Bauxite</th>
+      <th class="hand text-primary" ng-click="reverse=!reverse;predicate='-id'">ID</th>
+      <th>
+          遠征名 <span class="pull-right">時給 <input type="checkbox" ng-model="hr" ng-change="perHour=!perHour"> 大成功 <input type="checkbox" ng-model="dsk" ng-change="applys()"></span>        
+      </th>
+      <th>時間</th>
+      <th class="w90 text-primary hand" ng-hide="perHour" ng-click="reverse=!reverse;predicate='-regard[0]'">提督EXP</th>
+      <th class="w90 text-primary hand" ng-hide="perHour" ng-click="reverse=!reverse;predicate='-regard[1]'">燃料</th>
+      <th class="w90 text-primary hand" ng-hide="perHour" ng-click="reverse=!reverse;predicate='-regard[2]'">弾薬</th>
+      <th class="w90 text-primary hand" ng-hide="perHour" ng-click="reverse=!reverse;predicate='-regard[3]'">鋼材</th>
+      <th class="w90 text-primary hand" ng-hide="perHour" ng-click="reverse=!reverse;predicate='-regard[4]'">ボーキ</th>
+      <th class="w90 text-primary hand" ng-show="perHour" ng-click="reverse=!reverse;predicate='-regardph[0]'">Exp</th>
+      <th class="w90 text-primary hand" ng-show="perHour" ng-click="reverse=!reverse;predicate='-regardph[1]'">燃料</th>
+      <th class="w90 text-primary hand" ng-show="perHour" ng-click="reverse=!reverse;predicate='-regardph[2]'">弾薬</th>
+      <th class="w90 text-primary hand" ng-show="perHour" ng-click="reverse=!reverse;predicate='-regardph[3]'">鋼材</th>
+      <th class="w90 text-primary hand" ng-show="perHour" ng-click="reverse=!reverse;predicate='-regardph[4]'">ボーキ</th>
     </tr>
   </thead>
   <tbody>
@@ -63,10 +73,10 @@
       <td>{{item.name}}</td>
       <td>{{item.time}}</td>
       <td ng-hide="perHour">{{item.regard[0]}}</td>
-      <td ng-hide="perHour">{{item.regard[1]}}</td>
-      <td ng-hide="perHour">{{item.regard[2]}}</td>
-      <td ng-hide="perHour">{{item.regard[3]}}</td>
-      <td ng-hide="perHour">{{item.regard[4]}}</td>
+      <td ng-hide="perHour">{{item.regard[1]*dskt}}</td>
+      <td ng-hide="perHour">{{item.regard[2]*dskt}}</td>
+      <td ng-hide="perHour">{{item.regard[3]*dskt}}</td>
+      <td ng-hide="perHour">{{item.regard[4]*dskt}}</td>
       <td ng-show="perHour">{{item.regardph[0] | number:2}}</td>
       <td ng-show="perHour">{{item.regardph[1] | number:2}}</td>
       <td ng-show="perHour">{{item.regardph[2] | number:2}}</td>
