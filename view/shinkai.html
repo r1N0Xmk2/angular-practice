@@ -20,6 +20,7 @@
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
+				<th>No</th>
 				<th>舰名</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_stype';reverse=!reverse">艦種</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_taik[1]';reverse=!reverse">耐久</th>
@@ -35,6 +36,7 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="kan in kans | filter:'!なし' |filterSuffix: suffixsel| filterType:typesel | orderBy:predicate:reverse">
+				<td>{{$index+1}}</td>
 				<td>{{kan.api_name}}<span class="{{kan.api_yomi | nodash}}">{{kan.api_yomi | nodash | delbrs}}</span></td>
 				<td class="text-center">{{kan.api_stype | stype}}</td> 
 				<td class="text-center">{{kan.api_taik[1]}}</td>
