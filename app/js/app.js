@@ -130,6 +130,13 @@ myApp
 			if(selects.length === 0) selects = 0
 			$scope.typesel = selects
 		}
+		$scope.revType = function () {
+			console.log($scope.kanType)
+			$scope.kanType.forEach(function(e) {
+				e.selected = !e.selected
+			})
+			$scope.filterType();
+		}
 	}])
 	.factory('getJson', function($q, $timeout, $http) {
 		var getJson = {
