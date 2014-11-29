@@ -6,15 +6,17 @@
 		</span>
 	</h3>
 	<h3 class="pull-left mv5">
-		<span class="label hand" ng-class="{'label-danger':kanFinal,'label-default':!kanFinal}" ng-click="kanFinal=!kanFinal;filterFinal()">仅最终型</span>
+		<span class="label hand" ng-class="{'label-danger':kanFinal,'label-default':!kanFinal}" ng-click="kanFinal=!kanFinal;filterFinal()">
+			仅最终型
+		</span>
 	</h3>
 	<h3 ng-repeat="type in kanType" class="pull-left mv5">
 		<span class="label hand" ng-class="{'label-primary':type.selected,'label-default':!type.selected}" ng-click="type.selected=!type.selected;filterType()">
 			{{type.name}}
 		</span>
 	</h3>
-	
 </div>
+<hr>
 <div class="row">
 	<table class="table table-bordered table-hover">
 		<thead>

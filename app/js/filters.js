@@ -57,6 +57,7 @@ angular.module('myApp.filters', [])
 		return function (items, flag) {
 			if(!flag) return items;
 		  var filtered = [];
+		  items = items ||[]
 		  items.forEach(function(e) {
 		  	if(e.api_afterlv===0) {
 		  		filtered.push(e)

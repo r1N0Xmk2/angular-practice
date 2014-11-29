@@ -131,9 +131,7 @@ myApp
 					selects.push(e.val)
 				}
 			})
-			console.log($scope.allType)
 			$scope.typesel = selects
-			console.log($scope.typesel)
 			if($scope.typesel.length == 0) {
 				$scope.allType = false;
 			} else if($scope.typesel.length > 0) {
@@ -141,7 +139,6 @@ myApp
 			}
 		}
 		$scope.toggleType = function () {
-			console.log($scope.kanType)
 			$scope.typesel = [];
 			$scope.kanType.forEach(function(e) {
 				e.selected = $scope.allType;
