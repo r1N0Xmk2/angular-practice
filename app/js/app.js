@@ -104,7 +104,7 @@ myApp
 		$scope.kanFinal = true;
 		$scope.allType = true;
 		getJson.fetch('kansen.json').then(function(data) {
-			console.log(data);
+			// console.log(data);
 			$scope.kans = data.api_mst_ship;
 
 		})
@@ -131,7 +131,14 @@ myApp
 					selects.push(e.val)
 				}
 			})
+			console.log($scope.allType)
 			$scope.typesel = selects
+			console.log($scope.typesel)
+			if($scope.typesel.length == 0) {
+				$scope.allType = false;
+			} else if($scope.typesel.length > 0) {
+				$scope.allType = true;
+			}
 		}
 		$scope.toggleType = function () {
 			console.log($scope.kanType)
