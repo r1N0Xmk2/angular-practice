@@ -1,6 +1,7 @@
 var myApp = angular.module('myApp', [
 	'ngRoute',
-	'angular.filter'
+	'myApp.filters'
+	// 'angular.filter'
 ])
 myApp
 	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -74,11 +75,61 @@ myApp
 		})
 	}])
 	.controller('kmCtrl', ['$scope', '$filter', 'getJson', function($scope, $filter, getJson) {
+		$scope.predicate = 'api_stype';
+		$scope.reverse = false;
+		$scope.typesel = 0;
+		$scope.kanFinal = true;
 		getJson.fetch('kansen.json').then(function(data) {
 			console.log(data);
-			
 			$scope.kans = data.api_mst_ship;
+
 		})
+		$scope.summaxeq = function(kan) {
+			return kan.api_maxeq.reduce(function(a, b) {
+				return a + b;
+			})
+		}
+		$scope.fuelBull = function(kan) {
+			return kan.api_bull_max + kan.api_fuel_max;
+		}
+		var kanType = [
+			'海防艦', 
+			'駆逐艦', 
+			'軽巡洋艦', 
+			'重雷装巡洋艦', 
+			'重巡洋艦', 
+			'航空巡洋艦', 
+			'軽空母', 
+			'巡洋戦艦', 
+			'戦艦', 
+			'航空戦艦', 
+			'正規空母', 
+			'超弩級戦艦', 
+			'潜水艦', 
+			'潜水空母', 
+			'補給艦', 
+			'水上機母艦', 
+			'揚陸艦', 
+			'装甲空母', 
+			'工作艦', 
+			'潜水母艦'];
+		$scope.kanType = kanType.map(function(e,i) {
+			return {
+				name : e,
+				val : i+1,
+				selected : true
+			}
+		})
+		$scope.filterType = function() {
+			var selects = [];
+			$scope.kanType.forEach(function(e) {
+				if(e.selected ==- false) {
+					selects.push(e.val)
+				}
+			})
+			if(selects.length === 0) selects = 0
+			$scope.typesel = selects
+		}
 	}])
 	.factory('getJson', function($q, $timeout, $http) {
 		var getJson = {
@@ -93,49 +144,4 @@ myApp
 			}
 		}
 		return getJson;
-	})
-	
-	.filter('stype', function () {
-	    return function (n) {
-	    	stype = [
-	    						'', 
-	    						'', 
-	    						'駆逐艦', 
-	    						'軽巡洋艦', 
-	    						'重雷装巡洋艦', 
-	    						'重巡洋艦', 
-	    						'航空巡洋艦', 
-	    						'軽空母', 
-	    						'巡洋戦艦', 
-	    						'戦艦', 
-	    						'航空戦艦', 
-	    						'正規空母', 
-	    						'', 
-	    						'潜水艦', 
-	    						'潜水空母', 
-	    						'', 
-	    						'水上機母艦', 
-	    						'揚陸艦', 
-	    						'装甲空母', 
-	    						'工作艦', 
-	    						'潜水母艦'];
-	      return stype[n];
-	    }
-	})
-	.filter('maxeq', function () {
-	    return function (arr) {
-	    	var i = arr.indexOf(0);
-	    	var arr_=arr.map(function(e){return e})
-	    	i=i==0?1:i;
-	    	arr_.splice(i,arr.length-i)
-
-	    	return arr_.join(',');
-	      // return arr==undefined?0:arr;
-	    }
-	})
-	.filter('soku', function () {
-	    return function (n) {
-	    	if(n==5) return '低';
-	    	else if (n==10) return '高';
-	    }
 	});
