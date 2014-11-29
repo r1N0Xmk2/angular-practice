@@ -55,7 +55,7 @@ angular.module('myApp.filters', [])
 	})
 	.filter('afterlv0', function () {
 		return function (items, flag) {
-			if(!flag) return items
+			if(!flag) return items;
 		  var filtered = [];
 		  items.forEach(function(e) {
 		  	if(e.api_afterlv===0) {

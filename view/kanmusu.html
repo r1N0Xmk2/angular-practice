@@ -6,12 +6,12 @@
 <h4 class="pull-left">
 	<span class="label" ng-class="{'label-danger':kanFinal,'label-default':!kanFinal}" ng-click="kanFinal=!kanFinal;filterFinal()">仅最终型</span>
 </h4>
-<table class="table table-striped table-hover">
+<table class="table table-bordered table-hover">
 	<thead>
 		<tr>
 			<th>舰名</th>
 			<th class="text-center text-primary hand" ng-click="predicate='api_stype';reverse=!reverse">艦種</th>
-			<th class="text-center" >改造</th>
+			<th class="text-center text-primary hand" ng-click="predicate='api_afterlv';reverse=!reverse">改造</th>
 			<th class="text-center text-primary hand" ng-click="predicate='api_taik[1]';reverse=!reverse">耐久</th>
 			<th class="text-center text-primary hand" ng-click="predicate='api_souk[1]';reverse=!reverse">装甲</th>
 			<th class="text-center text-primary hand" ng-click="predicate='api_houg[1]';reverse=!reverse">火力</th>
@@ -20,7 +20,7 @@
 			<th class="text-center text-primary hand"><span class="text-primary hand"  ng-click="predicate='api_luck[0]';reverse=!reverse">运</span>/<span class="text-primary hand" ng-click="predicate='api_luck[1]';reverse=!reverse">运上限</span></th>
 			<th class="text-center text-primary hand" ng-click="predicate='api_leng';reverse=!reverse">射程</th>
 			<th class="text-center text-primary hand" ng-click="predicate='api_soku';reverse=!reverse">速力</th>
-			<th class="text-center text-primary hand" ng-click="predicate=summaxeq;reverse=!reverse">最大搭载数</th>
+			<th class="text-center text-primary hand" ng-click="predicate=summaxeq;reverse=!reverse">搭载</th>
 			<th class="text-center text-primary hand" ><span class="text-primary hand" ng-click="predicate='api_fuel_max';reverse=!reverse">燃</span>/<span class="text-primary hand" ng-click="predicate='api_bull_max';reverse=!reverse">弹</span></th>
 			<th class="text-center text-primary hand" ng-click="predicate=fuelBull;reverse=!reverse">燃+弹</th>
 		</tr>
