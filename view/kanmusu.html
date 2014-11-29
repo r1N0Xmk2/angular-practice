@@ -1,6 +1,6 @@
 <h4 class="pull-left">
-	<span class="label hand label-info"  ng-click="revType()">
-	反选舰种
+	<span class="label hand" ng-class="{'label-info':allType,'label-default':!allType}" ng-click="allType=!allType;toggleType()">
+	全舰种
 </span>
 </h4>
 <h4 ng-repeat="type in kanType" class="pull-left">

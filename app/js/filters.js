@@ -67,10 +67,9 @@ angular.module('myApp.filters', [])
 	})
 	.filter('filterType', function () {
 	  return function (items, arr) {
-	    if(arr === 0) return items;
     	var filtered = [];
     	items.forEach(function(e) {
-    		if(arr.indexOf(e.api_stype)==-1) {
+    		if(arr.indexOf(e.api_stype)!==-1) {
     			filtered.push(e)
     		}
     	})

@@ -75,23 +75,6 @@ myApp
 		})
 	}])
 	.controller('kmCtrl', ['$scope', '$filter', 'getJson', function($scope, $filter, getJson) {
-		$scope.predicate = 'api_stype';
-		$scope.reverse = false;
-		$scope.typesel = 0;
-		$scope.kanFinal = true;
-		getJson.fetch('kansen.json').then(function(data) {
-			console.log(data);
-			$scope.kans = data.api_mst_ship;
-
-		})
-		$scope.summaxeq = function(kan) {
-			return kan.api_maxeq.reduce(function(a, b) {
-				return a + b;
-			})
-		}
-		$scope.fuelBull = function(kan) {
-			return kan.api_bull_max + kan.api_fuel_max;
-		}
 		var kanType = [
 			'海防艦', 
 			'駆逐艦', 
@@ -113,6 +96,27 @@ myApp
 			'装甲空母', 
 			'工作艦', 
 			'潜水母艦'];
+		$scope.predicate = 'api_stype';
+		$scope.reverse = false;
+		$scope.typesel = kanType.map(function(e,i) {
+			return i+1;
+		});
+		$scope.kanFinal = true;
+		$scope.allType = true;
+		getJson.fetch('kansen.json').then(function(data) {
+			console.log(data);
+			$scope.kans = data.api_mst_ship;
+
+		})
+		$scope.summaxeq = function(kan) {
+			return kan.api_maxeq.reduce(function(a, b) {
+				return a + b;
+			})
+		}
+		$scope.fuelBull = function(kan) {
+			return kan.api_bull_max + kan.api_fuel_max;
+		}
+		
 		$scope.kanType = kanType.map(function(e,i) {
 			return {
 				name : e,
@@ -123,17 +127,17 @@ myApp
 		$scope.filterType = function() {
 			var selects = [];
 			$scope.kanType.forEach(function(e) {
-				if(e.selected ==- false) {
+				if(e.selected == true) {
 					selects.push(e.val)
 				}
 			})
-			if(selects.length === 0) selects = 0
 			$scope.typesel = selects
 		}
-		$scope.revType = function () {
+		$scope.toggleType = function () {
 			console.log($scope.kanType)
+			$scope.typesel = [];
 			$scope.kanType.forEach(function(e) {
-				e.selected = !e.selected
+				e.selected = $scope.allType;
 			})
 			$scope.filterType();
 		}
