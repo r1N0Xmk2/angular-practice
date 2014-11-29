@@ -4,9 +4,9 @@
 			{{allType?'取消选择舰种':'全舰种'}}
 		</span>
 	</h3>
-	<h3 class="pull-left mv5">
-		<span class="label hand" ng-class="{'label-danger':kanFinal,'label-default':!kanFinal}" ng-click="kanFinal=!kanFinal;filterFinal()">
-			仅最终型
+	<h3 ng-repeat="suffix in kanSuffix" class="pull-left mv5">
+		<span class="label hand" ng-class="{'label-success':suffix.selected,'label-default':!suffix.selected}" ng-click="suffix.selected=!suffix.selected;filterSuffix()">
+			{{suffix.name}}
 		</span>
 	</h3>
 	<h3 ng-repeat="type in kanType" class="pull-left mv5">
@@ -22,36 +22,30 @@
 			<tr>
 				<th>舰名</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_stype';reverse=!reverse">艦種</th>
-				<th class="text-center text-primary hand" ng-click="predicate='api_afterlv';reverse=!reverse">改造</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_taik[1]';reverse=!reverse">耐久</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_souk[1]';reverse=!reverse">装甲</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_houg[1]';reverse=!reverse">火力</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_raig[1]';reverse=!reverse">雷装</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_tyku[1]';reverse=!reverse">对空</th>
-				<th class="text-center text-primary hand"><span class="text-primary hand"  ng-click="predicate='api_luck[0]';reverse=!reverse">运</span>/<span class="text-primary hand" ng-click="predicate='api_luck[1]';reverse=!reverse">运上限</span></th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_luck[0]';reverse=!reverse">运</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_leng';reverse=!reverse">射程</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_soku';reverse=!reverse">速力</th>
 				<th class="text-center text-primary hand" ng-click="predicate=summaxeq;reverse=!reverse">搭载</th>
-				<th class="text-center text-primary hand" ><span class="text-primary hand" ng-click="predicate='api_fuel_max';reverse=!reverse">燃</span>/<span class="text-primary hand" ng-click="predicate='api_bull_max';reverse=!reverse">弹</span></th>
-				<th class="text-center text-primary hand" ng-click="predicate=fuelBull;reverse=!reverse">燃+弹</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="kan in kans | filter:'!なし' |afterlv0: kanFinal| filterType:typesel | orderBy:predicate:reverse">
-				<td>{{kan.api_name}}/{{kan.api_yomi}}</td>
-				<td class="text-center">{{kan.api_stype | stype}}</td>
-				<td class="text-center">{{kan.api_afterlv | afterlv}}</td>
+			<tr ng-repeat="kan in kans | filter:'!なし' |filterSuffix: suffixsel| filterType:typesel | orderBy:predicate:reverse">
+				<td>{{kan.api_name}}<span class="{{kan.api_yomi | nodash}}">{{kan.api_yomi | nodash | delbrs}}</span></td>
+				<td class="text-center">{{kan.api_stype | stype}}</td> 
 				<td class="text-center">{{kan.api_taik[1]}}</td>
 				<td class="text-center gray">{{kan.api_souk[1]}}</td>
 				<td class="text-center red">{{kan.api_houg[1]}}</td>
 				<td class="text-center blue">{{kan.api_raig[1]}}</td>
 				<td class="text-center green">{{kan.api_tyku[1]}}</td>
-				<td class="text-center">{{kan.api_luck.join('/')}}</td>
+				<td class="text-center">{{kan.api_luck[0]}}</td>
 				<td class="text-center">{{kan.api_leng | leng}}</td>
 				<td class="text-center">{{kan.api_soku | soku}}</td>
 				<td class="text-center">{{kan.api_maxeq | maxeq}}</td>
-				<td class="text-center">{{kan.api_fuel_max}}/{{kan.api_bull_max}}</td>
-				<td class="text-center">{{kan.api_fuel_max+kan.api_bull_max}}</td>
 			</tr>
 		</tbody>
 	</table>

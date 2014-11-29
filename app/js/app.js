@@ -1,7 +1,7 @@
 var myApp = angular.module('myApp', [
 	'ngRoute',
+	'myApp.services',
 	'myApp.filters'
-	// 'angular.filter'
 ])
 myApp
 	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -17,6 +17,10 @@ myApp
 			.when('/kanmusu', {
 				templateUrl: 'view/kanmusu.html',
 				controller: 'kmCtrl'
+			})
+			.when('/shinkai', {
+				templateUrl: 'view/shinkai.html',
+				controller: 'dkmCtrl'
 			}).
 			otherwise({
 				redirectTo: '/'
@@ -74,28 +78,7 @@ myApp
 			}
 		})
 	}])
-	.controller('kmCtrl', ['$scope', '$filter', 'getJson', function($scope, $filter, getJson) {
-		var kanType = [
-			'海防艦', 
-			'駆逐艦', 
-			'軽巡洋艦', 
-			'重雷装巡洋艦', 
-			'重巡洋艦', 
-			'航空巡洋艦', 
-			'軽空母', 
-			'巡洋戦艦', 
-			'戦艦', 
-			'航空戦艦', 
-			'正規空母', 
-			'超弩級戦艦', 
-			'潜水艦', 
-			'潜水空母', 
-			'補給艦', 
-			'水上機母艦', 
-			'揚陸艦', 
-			'装甲空母', 
-			'工作艦', 
-			'潜水母艦'];
+	.controller('kmCtrl', ['$scope', '$filter', 'getJson', 'kanType', function($scope, $filter, getJson, kanType) {
 		$scope.predicate = 'api_stype';
 		$scope.reverse = false;
 		$scope.typesel = kanType.map(function(e,i) {
@@ -104,7 +87,6 @@ myApp
 		$scope.kanFinal = true;
 		$scope.allType = true;
 		getJson.fetch('kansen.json').then(function(data) {
-			// console.log(data);
 			$scope.kans = data.api_mst_ship;
 
 		})
@@ -117,13 +99,7 @@ myApp
 			return kan.api_bull_max + kan.api_fuel_max;
 		}
 		
-		$scope.kanType = kanType.map(function(e,i) {
-			return {
-				name : e,
-				val : i+1,
-				selected : true
-			}
-		})
+		$scope.kanType = toSelectors(kanType);
 		$scope.filterType = function() {
 			var selects = [];
 			$scope.kanType.forEach(function(e) {
@@ -146,17 +122,63 @@ myApp
 			$scope.filterType();
 		}
 	}])
-	.factory('getJson', function($q, $timeout, $http) {
-		var getJson = {
-			fetch: function(what) {
-				var deferred = $q.defer();
-				$timeout(function() {
-					$http.get('data/' + what).success(function(data) {
-						deferred.resolve(data);
-					});
-				}, 30);
-				return deferred.promise;
+	.controller('dkmCtrl', ['$scope', '$filter', 'getJson', 'kanType', 'toSelectors', function($scope, $filter, getJson, kanType, toSelectors) {
+		$scope.predicate = 'api_stype';
+		$scope.reverse = false;
+		$scope.typesel = kanType.map(function(e,i) {
+			return i+1;
+		});
+		$scope.kanFinal = true;
+		$scope.allType = true;
+		var kanSuffix = ['normal', 'elite', 'flagship', '改flagship'];
+		$scope.kanSuffix = toSelectors(kanSuffix);
+		$scope.suffixsel = kanSuffix.map(function(e, i) {
+			return i+1;
+		})
+		getJson.fetch('dekikan.json').then(function(data) {
+			// console.log(data);
+			$scope.kans = data.api_mst_ship;
+
+		})
+		$scope.summaxeq = function(kan) {
+			return kan.api_maxeq.reduce(function(a, b) {
+				return a + b;
+			})
+		}
+		$scope.fuelBull = function(kan) {
+			return kan.api_bull_max + kan.api_fuel_max;
+		}
+		$scope.kanType = toSelectors(kanType);
+		$scope.filterType = function() {
+			var selects = [];
+			$scope.kanType.forEach(function(e) {
+				if(e.selected == true) {
+					selects.push(e.val)
+				}
+			})
+			$scope.typesel = selects
+			if($scope.typesel.length == 0) {
+				$scope.allType = false;
+			} else if($scope.typesel.length > 0) {
+				$scope.allType = true;
 			}
 		}
-		return getJson;
-	});
+		$scope.toggleType = function () {
+			$scope.typesel = [];
+			$scope.kanType.forEach(function(e) {
+				e.selected = $scope.allType;
+			})
+			$scope.filterType();
+		}
+		$scope.filterSuffix = function() {
+			var selects = [];
+			$scope.kanSuffix.forEach(function(e) {
+				if(e.selected == true) {
+					selects.push(e.val)
+				}
+			})
+			$scope.suffixsel = selects;
+			console.log($scope.suffixsel)
+		}
+	}]);
+

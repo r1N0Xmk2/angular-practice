@@ -13,7 +13,19 @@
 .green {
 	color: green;
 }
+.flagship {
+	color: #DFB700;
+}
+.brsflagship {
+	color: #00BFFF;
+}
+.elite {
+	color: #F00;
+}
 html .mv5 {
 	margin-top: 5px;
 	margin-bottom: 5px;
+}
+span.label {
+	font-weight: normal;
 }

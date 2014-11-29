@@ -40,6 +40,7 @@ angular.module('myApp.filters', [])
 	    return function (n) {
 	    	if(n==5) return '低';
 	    	else if (n==10) return '高';
+	    	else return '无'
 	    }
 	})
 	.filter('afterlv', function () {
@@ -48,9 +49,9 @@ angular.module('myApp.filters', [])
 	    }
 	})
 	.filter('leng', function () {
-	    var arr = ['短', '中', '長', '超長'];
+	    var arr = ['超短', '短', '中', '長', '超長'];
 	    return function(n) {
-	    	return arr[n-1];
+	    	return arr[n];
 	    }
 	})
 	.filter('afterlv0', function () {
@@ -76,5 +77,32 @@ angular.module('myApp.filters', [])
     	})
     	return filtered;	
 	        
+	  };
+	})
+	.filter('filterSuffix', function () {
+	  return function (items, arr) {
+    	var filtered = [];
+    	items = items || []
+    	kanSuffix = ['', 'elite', 'flagship', 'brsflagship'];
+    	arr_=arr.map(function(e){
+    		return kanSuffix[e-1];
+    	})
+    	items.forEach(function(e) {
+    		if(arr_.indexOf(e.api_yomi)!==-1) {
+    			filtered.push(e)
+    		}
+    	})
+    	return filtered;	
+	        
+	  };
+	})
+	.filter('nodash', function () {
+	  return function (str) {
+    	return str.replace(/\-/,'')
+	  };
+	})
+	.filter('delbrs', function () {
+	  return function (str) {
+    	return str.replace(/brs/,'')
 	  };
 	});
