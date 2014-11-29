@@ -26,14 +26,19 @@ angular.module('myApp.filters', [])
 	    }
 	})
 	.filter('maxeq', function () {
-	    return function (arr) {
-	    	var i = arr.indexOf(0);
-	    	var arr_=arr.map(function(e){return e})
-	    	i = i === 0 ? 1 : i;
-	    	arr_.splice(i, arr.length-i)
-	    	total = arr_.reduce(function(a,b){return a+b});
-	    	return (total===0?0:total +'('+ arr_.join(',')+')')
+	    return function (oldArr) {
+	    	var arr = oldArr.map(function(e){return e})
+	    	for(;arr[arr.length-1] === 0;){
+	    		arr.pop()
+	    	}
+	    	var total = 0;
+	    	if(arr.length!==0) {
+	    		total = arr.reduce(function(a,b){return a+b});
+	    	}
+	    	
+	    	return (total===0?0:total +'('+ arr.join(',')+')')
 	      // return arr==undefined?0:arr;
+	      // return arr
 	    }
 	})
 	.filter('soku', function () {

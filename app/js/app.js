@@ -78,7 +78,7 @@ myApp
 			}
 		})
 	}])
-	.controller('kmCtrl', ['$scope', '$filter', 'getJson', 'kanType', function($scope, $filter, getJson, kanType) {
+	.controller('kmCtrl', ['$scope', '$filter', 'getJson', 'kanType', 'toSelectors', function($scope, $filter, getJson, kanType, toSelectors) {
 		$scope.predicate = 'api_stype';
 		$scope.reverse = false;
 		$scope.typesel = kanType.map(function(e,i) {
@@ -88,7 +88,7 @@ myApp
 		$scope.allType = true;
 		getJson.fetch('kansen.json').then(function(data) {
 			$scope.kans = data.api_mst_ship;
-
+			console.log($scope.kans)
 		})
 		$scope.summaxeq = function(kan) {
 			return kan.api_maxeq.reduce(function(a, b) {
