@@ -23,7 +23,7 @@
 				<th>舰名</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_stype';reverse=!reverse">艦種</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_afterlv';reverse=!reverse">改造</th>
-				<th class="text-center text-primary hand" ng-click="predicate='api_taik[1]';reverse=!reverse">耐久</th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_taik[0]';reverse=!reverse">耐久</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_souk[1]';reverse=!reverse">装甲</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_houg[1]';reverse=!reverse">火力</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_raig[1]';reverse=!reverse">雷装</th>
@@ -41,7 +41,7 @@
 				<td>{{kan.api_name}}/{{kan.api_yomi}}</td>
 				<td class="text-center">{{kan.api_stype | stype}}</td>
 				<td class="text-center">{{kan.api_afterlv | afterlv}}</td>
-				<td class="text-center">{{kan.api_taik[1]}}</td>
+				<td class="text-center">{{kan.api_taik[0]}}</td>
 				<td class="text-center gray">{{kan.api_souk[1]}}</td>
 				<td class="text-center red">{{kan.api_houg[1]}}</td>
 				<td class="text-center blue">{{kan.api_raig[1]}}</td>
