@@ -1,0 +1,49 @@
+
+<label for="">LV</label><input class="w40" type="number" ng-model="admiral" ng-change="calvr()">
+<table class="table table-borderd">
+    <tbody>
+      <tr>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <th>1</th>
+              <th>2</th>
+              <th>3</th>
+              <th>4</th>
+              <th>5</th>
+              <th>6</th>
+            </tr>
+            <tr>
+              <td><input type="number" class="w40" ng-model="team[0]" ng-change="calvr()"></td>
+              <td><input type="number" class="w40" ng-model="team[1]" ng-change="calvr()"></td>
+              <td><input type="number" class="w40" ng-model="team[2]" ng-change="calvr()"></td>
+              <td><input type="number" class="w40" ng-model="team[3]" ng-change="calvr()"></td>
+              <td><input type="number" class="w40" ng-model="team[4]" ng-change="calvr()"></td>
+              <td><input type="number" class="w40" ng-model="team[5]" ng-change="calvr()"></td>
+            </tr>
+          </tbody>
+        </table>
+      </tr>
+      <tr>
+        <table class="table table-bordered">
+          <tbody>
+            <tr ng-repeat="(key,val) in eqs">
+              <th width="w5em">{{key | etype}}</th>
+              <td>
+                <ul class="list-group">
+                  <li class="list-group-item" ng-repeat="e in val">
+                    <p ng-repeat="a in options[key]">
+                      {{a.api_id}}
+                    </p>
+                    <!-- <select class="form-control input-sm" ng-model="e.eqid" ng-options="equip.api for equip in filterEq(key)" ng-change="calvr()"></select> -->
+                    <input type="number" ng-model="e.num" ng-change="calvr()">
+                  </li>
+                  <li class="list-group-item" ng-click="addItem(key)">+</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </tr>
+    </tbody>
+  </table>

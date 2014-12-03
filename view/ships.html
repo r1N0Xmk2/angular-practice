@@ -1,12 +1,12 @@
 <div class="row">
 	<h3 class="pull-left mv5">
 		<span class="label hand" ng-class="{'label-warning':allType,'label-default':!allType}" ng-click="allType=!allType;toggleType()">
-			{{allType?'取消选择舰种':'全舰种'}}
+			{{allType?'取消選擇艦種':'全艦種'}}
 		</span>
 	</h3>
 	<h3 class="pull-left mv5">
 		<span class="label hand" ng-class="{'label-danger':shipFinal,'label-default':!shipFinal}" ng-click="shipFinal=!shipFinal;filterFinal()">
-			仅最终型
+			僅最終型
 		</span>
 	</h3>
 	<h3 ng-repeat="type in shipType" class="pull-left mv5">
@@ -21,7 +21,7 @@
 		<thead>
 			<tr>
 				<th>No</th>
-				<th>舰名</th>
+				<th>名稱</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_stype';reverse=!reverse">艦種</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_afterlv';reverse=!reverse">改造</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_taik[0]';reverse=!reverse">耐久</th>
