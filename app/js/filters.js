@@ -1,51 +1,38 @@
 angular.module('myApp.filters', [])
-	.filter('stype', function () {
+	.filter('etype', function (eqType) {
 	    return function (n) {
-	    	var stype = [
-							'海防艦', 
-							'駆逐艦', 
-							'軽巡洋艦', 
-							'重雷装巡洋艦', 
-							'重巡洋艦', 
-							'航空巡洋艦', 
-							'軽空母', 
-							'巡洋戦艦', 
-							'戦艦', 
-							'航空戦艦', 
-							'正規空母', 
-							'超弩級戦艦', 
-							'潜水艦', 
-							'潜水空母', 
-							'補給艦', 
-							'水上機母艦', 
-							'揚陸艦', 
-							'装甲空母', 
-							'工作艦', 
-							'潜水母艦'];
-	      return stype[n-1];
+	      return eqType[n-1];
+	    }
+	})
+	.filter('stype', function (shipType) {
+	    return function (n) {
+	      return shipType[n-1];
 	    }
 	})
 	.filter('maxeq', function () {
 	    return function (oldArr) {
 	    	var arr = oldArr.map(function(e){return e})
 	    	for(;arr[arr.length-1] === 0;){
-	    		arr.pop()
+	    		arr.pop();
 	    	}
 	    	var total = 0;
 	    	if(arr.length!==0) {
 	    		total = arr.reduce(function(a,b){return a+b});
 	    	}
-	    	
 	    	return (total===0?0:total +'('+ arr.join(',')+')')
-	      // return arr==undefined?0:arr;
-	      // return arr
 	    }
+	})
+	.filter('rare', function () {
+	  return function (n) {
+    	var rare = ['コモン','レア','ホロ','Sホロ','SSホロ','SSSホロ']
+    	return rare[n];		        
+	  };
 	})
 	.filter('soku', function () {
 	    return function (n) {
-	    	if(n==5) return '低';
-	    	else if (n==10) return '高';
-	    	else return '无'
+	    	if(n==5) return '低速';
+	    	else if (n==10) return '高速';
+	    	else return '陆上'
 	    }
 	})
 	.filter('afterlv', function () {
@@ -54,7 +41,7 @@ angular.module('myApp.filters', [])
 	    }
 	})
 	.filter('leng', function () {
-	    var arr = ['超短', '短', '中', '長', '超長'];
+	    var arr = ['無', '短', '中', '長', '超長'];
 	    return function(n) {
 	    	return arr[n];
 	    }
@@ -74,14 +61,28 @@ angular.module('myApp.filters', [])
 	})
 	.filter('filterType', function () {
 	  return function (items, arr) {
-    	var filtered = [];
-    	items.forEach(function(e) {
-    		if(arr.indexOf(e.api_stype)!==-1) {
-    			filtered.push(e)
-    		}
-    	})
-    	return filtered;	
-	        
+	  	if(items) {
+	  		var filtered = [];
+	  		items.forEach(function(e) {
+	  			if(arr.indexOf(e.api_stype)!==-1) {
+	  				filtered.push(e);
+	  			}
+	  		})
+	  		return filtered;	
+	  	}
+	  };
+	})
+	.filter('filterEqType', function () {
+	  return function (items, arr) {
+	  	if(items) {
+	  		var filtered = [];
+	  		items.forEach(function(e) {
+	  			if(arr.indexOf(e.api_type[2])!==-1) {
+	  				filtered.push(e);
+	  			}
+	  		})
+	  		return filtered;	
+	  	}
 	  };
 	})
 	.filter('filterSuffix', function () {
@@ -98,7 +99,6 @@ angular.module('myApp.filters', [])
     		}
     	})
     	return filtered;	
-	        
 	  };
 	})
 	.filter('nodash', function () {
@@ -109,5 +109,10 @@ angular.module('myApp.filters', [])
 	.filter('delbrs', function () {
 	  return function (str) {
     	return str.replace(/brs/,'')
+	  };
+	})
+	.filter('nobr', function () {
+	  return function (str) {
+    	return str.replace(/\<br\>/,'')
 	  };
 	});

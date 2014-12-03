@@ -1,0 +1,55 @@
+<div class="row">
+	<h3 class="pull-left mv5">
+		<span class="label hand" ng-class="{'label-warning':allType,'label-default':!allType}" ng-click="allType=!allType;toggleType()">
+			{{allType?'取消選擇裝備':'全裝備'}}
+		</span>
+	</h3>
+	<h3 ng-repeat="type in eqType" class="pull-left mv5">
+		<span class="label hand" ng-class="{'label-primary':type.selected,'label-default':!type.selected}" ng-click="type.selected=!type.selected;filterType()">
+			{{type.name}}
+		</span>
+	</h3>
+</div>
+<hr>
+<div class="row">
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>裝備名</th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_type[2]';reverse=!reverse">種類</th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_souk';reverse=!reverse">装甲</th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_houg';reverse=!reverse">火力</th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_raig';reverse=!reverse">雷装</th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_saku';reverse=!reverse">索敌</th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_baku';reverse=!reverse">爆装</th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_tyku';reverse=!reverse">对空</th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_tais';reverse=!reverse">对潜</th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_houm';reverse=!reverse">炮击命中</th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_raim';reverse=!reverse">雷击命中</th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_houk';reverse=!reverse">回避</th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_leng';reverse=!reverse">射程</th>
+				<th class="text-center text-primary hand" ng-click="predicate='api_rare';reverse=!reverse">レア</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="eq in eqs | filterEqType:typesel | orderBy:predicate:reverse">
+				<td>{{$index+1}}</td>
+				<td>{{eq.api_name}}</td>
+				<td class="text-center">{{eq.api_type[2] | etype}}</td>
+				<td class="text-center gray">{{eq.api_souk}}</td>
+				<td class="text-center red">{{eq.api_houg}}</td>
+				<td class="text-center blue">{{eq.api_raig}}</td>
+				<td class="text-center">{{eq.api_saku}}</td>
+				<td class="text-center red">{{eq.api_baku}}</td>
+				<td class="text-center green">{{eq.api_tyku}}</td>
+				<td class="text-center">{{eq.api_tais}}</td>
+				<td class="text-center red">{{eq.api_houm}}</td>
+				<td class="text-center blue">{{eq.api_raim}}</td>
+				<td class="text-center">{{eq.api_houk}}</td>
+				<td class="text-center">{{eq.api_leng | leng}}</td>
+				<td class="text-center">{{eq.api_rare | rare}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

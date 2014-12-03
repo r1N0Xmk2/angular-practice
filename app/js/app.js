@@ -21,10 +21,22 @@ myApp
 			.when('/enemy', {
 				templateUrl: 'view/enemy.html',
 				controller: 'enemyCtrl'
-			}).
-			otherwise({
-				redirectTo: '/'
 			})
+			.when('/equipment', {
+				templateUrl: 'view/equipment.html',
+				controller: 'eqCtrl'
+			})
+			.when('/enemy-equipment', {
+				templateUrl: 'view/equipment.html',
+				controller: 'eeqCtrl'
+			})
+			.when('/view-range', {
+				templateUrl: 'view/view-range.html',
+				controller: 'vrCtrl'
+			})
+			.otherwise({
+				redirectTo: '/'
+			});
 	}])
 	.controller('mainCtrl', ['$scope', function($scope) {
 
@@ -88,7 +100,6 @@ myApp
 		$scope.allType = true;
 		getJson.fetch('Ships.json').then(function(data) {
 			$scope.ships = data.api_mst_ship;
-			console.log($scope.ships)
 		})
 		$scope.summaxeq = function(ship) {
 			return ship.api_maxeq.reduce(function(a, b) {
@@ -136,9 +147,7 @@ myApp
 			return i+1;
 		})
 		getJson.fetch('Enemy.json').then(function(data) {
-			// console.log(data);
 			$scope.ships = data.api_mst_ship;
-
 		})
 		$scope.summaxeq = function(ship) {
 			return ship.api_maxeq.reduce(function(a, b) {
@@ -178,6 +187,67 @@ myApp
 				}
 			})
 			$scope.suffixsel = selects;
-			console.log($scope.suffixsel)
+		}
+	}])
+	.controller('eqCtrl', ['$scope', '$filter', 'getJson', 'eqType', 'toSelectors', function($scope, $filter, getJson, eqType, toSelectors) {
+		$scope.predicate = 'api_type';
+		$scope.reverse = false;
+		$scope.typesel = eqType.map(function(e,i){return i+1;});
+		$scope.allType = true;
+		getJson.fetch('Equipment.json').then(function(data) {
+			$scope.eqs = data.api_mst_slotitem;
+		})
+		$scope.eqType = toSelectors(eqType);
+		$scope.filterType = function() {
+			var selects = [];
+			$scope.eqType.forEach(function(e) {
+				if(e.selected == true) {
+					selects.push(e.val)
+				}
+			})
+			$scope.typesel = selects
+			if($scope.typesel.length == 0) {
+				$scope.allType = false;
+			} else if($scope.typesel.length > 0) {
+				$scope.allType = true;
+			}
+		}
+		$scope.toggleType = function () {
+			$scope.typesel = [];
+			$scope.eqType.forEach(function(e) {
+				e.selected = $scope.allType;
+			})
+			$scope.filterType();
+		}
+	}])
+	.controller('eeqCtrl', ['$scope', '$filter', 'getJson', 'eqType', 'toSelectors', function($scope, $filter, getJson, eqType, toSelectors) {
+		$scope.predicate = 'api_type';
+		$scope.reverse = false;
+		$scope.typesel = eqType.map(function(e,i){return i+1;});
+		$scope.allType = true;
+		getJson.fetch('EnemyEquipment.json').then(function(data) {
+			$scope.eqs = data.api_mst_slotitem;
+		})
+		$scope.eqType = toSelectors(eqType);
+		$scope.filterType = function() {
+			var selects = [];
+			$scope.eqType.forEach(function(e) {
+				if(e.selected == true) {
+					selects.push(e.val)
+				}
+			})
+			$scope.typesel = selects
+			if($scope.typesel.length == 0) {
+				$scope.allType = false;
+			} else if($scope.typesel.length > 0) {
+				$scope.allType = true;
+			}
+		}
+		$scope.toggleType = function () {
+			$scope.typesel = [];
+			$scope.eqType.forEach(function(e) {
+				e.selected = $scope.allType;
+			})
+			$scope.filterType();
 		}
 	}]);
