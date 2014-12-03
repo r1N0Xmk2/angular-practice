@@ -4,12 +4,12 @@
 			{{allType?'取消选择舰种':'全舰种'}}
 		</span>
 	</h3>
-	<h3 ng-repeat="suffix in kanSuffix" class="pull-left mv5">
+	<h3 ng-repeat="suffix in shipSuffix" class="pull-left mv5">
 		<span class="label hand" ng-class="{'label-success':suffix.selected,'label-default':!suffix.selected}" ng-click="suffix.selected=!suffix.selected;filterSuffix()">
 			{{suffix.name}}
 		</span>
 	</h3>
-	<h3 ng-repeat="type in kanType" class="pull-left mv5">
+	<h3 ng-repeat="type in shipType" class="pull-left mv5">
 		<span class="label hand" ng-class="{'label-primary':type.selected,'label-default':!type.selected}" ng-click="type.selected=!type.selected;filterType()">
 			{{type.name}}
 		</span>
@@ -35,19 +35,19 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="kan in kans | filter:'!なし' |filterSuffix: suffixsel| filterType:typesel | orderBy:predicate:reverse">
+			<tr ng-repeat="ship in ships | filter:'!なし' |filterSuffix: suffixsel| filterType:typesel | orderBy:predicate:reverse">
 				<td>{{$index+1}}</td>
-				<td>{{kan.api_name}}<span class="{{kan.api_yomi | nodash}}">{{kan.api_yomi | nodash | delbrs}}</span></td>
-				<td class="text-center">{{kan.api_stype | stype}}</td> 
-				<td class="text-center">{{kan.api_taik[1]}}</td>
-				<td class="text-center gray">{{kan.api_souk[1]}}</td>
-				<td class="text-center red">{{kan.api_houg[1]}}</td>
-				<td class="text-center blue">{{kan.api_raig[1]}}</td>
-				<td class="text-center green">{{kan.api_tyku[1]}}</td>
-				<td class="text-center">{{kan.api_luck[0]}}</td>
-				<td class="text-center">{{kan.api_leng | leng}}</td>
-				<td class="text-center">{{kan.api_soku | soku}}</td>
-				<td class="text-center">{{kan.api_maxeq | maxeq}}</td>
+				<td>{{ship.api_name}}<span class="{{ship.api_yomi | nodash}}">{{ship.api_yomi | nodash | delbrs}}</span></td>
+				<td class="text-center">{{ship.api_stype | stype}}</td> 
+				<td class="text-center">{{ship.api_taik[1]}}</td>
+				<td class="text-center gray">{{ship.api_souk[1]}}</td>
+				<td class="text-center red">{{ship.api_houg[1]}}</td>
+				<td class="text-center blue">{{ship.api_raig[1]}}</td>
+				<td class="text-center green">{{ship.api_tyku[1]}}</td>
+				<td class="text-center">{{ship.api_luck[0]}}</td>
+				<td class="text-center">{{ship.api_leng | leng}}</td>
+				<td class="text-center">{{ship.api_soku | soku}}</td>
+				<td class="text-center">{{ship.api_maxeq | maxeq}}</td>
 			</tr>
 		</tbody>
 	</table>

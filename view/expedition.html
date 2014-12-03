@@ -15,18 +15,18 @@
     <tr>
       <td class="np">
         <div class="form-group form-inline">
-          <select class="form-control input-sm" name="en1" ng-model="es1" ng-options="e1 for e1 in ensei1" ng-change="calget()"></select><label for="dsk1">大成功</label><input id="dsk1" type="checkbox" class="" ng-model="esd1" ng-change="calget()">
+          <select class="form-control input-sm" name="en1" ng-model="es1" ng-options="e1 for e1 in expedition1" ng-change="calget()"></select><label for="greatSuccess1">大成功</label><input id="greatSuccess1" type="checkbox" class="" ng-model="esd1" ng-change="calget()">
         </div>
         
       </td>
       <td class="np">
         <div class="form-group form-inline">
-          <select class="form-control input-sm" name="en2" ng-model="es2" ng-options="e2 for e2 in ensei2" ng-change="calget()"></select><label for="dsk2">大成功</label><input id="dsk2" type="checkbox" class="" ng-model="esd2" ng-change="calget()">
+          <select class="form-control input-sm" name="en2" ng-model="es2" ng-options="e2 for e2 in expedition2" ng-change="calget()"></select><label for="greatSuccess2">大成功</label><input id="greatSuccess2" type="checkbox" class="" ng-model="esd2" ng-change="calget()">
         </div>
       </td>
       <td class="np">
         <div class="form-group form-inline">
-          <select class="form-control input-sm" name="en3" ng-model="es3" ng-options="e3 for e3 in ensei3" ng-change="calget()"></select><label for="dsk3">大成功</label><input id="dsk3" type="checkbox" class="" ng-model="esd3" ng-change="calget()">
+          <select class="form-control input-sm" name="en3" ng-model="es3" ng-options="e3 for e3 in expedition3" ng-change="calget()"></select><label for="greatSuccess3">大成功</label><input id="greatSuccess3" type="checkbox" class="" ng-model="esd3" ng-change="calget()">
         </div>
       </td>
       <td class="np"><input type="number" class="form-control input-sm" style="width:60px" ng-model="esh" ng-change="calget()"></td>
@@ -44,7 +44,7 @@
     <tr>
       <th class="hand text-primary" ng-click="reverse=!reverse;predicate='-id'">ID</th>
       <th>
-          遠征名 <span class="pull-right">時給 <input type="checkbox" ng-model="hr" ng-change="perHour=!perHour"> 大成功 <input type="checkbox" ng-model="dsk" ng-change="applys()"></span>        
+          遠征名 <span class="pull-right">時給 <input type="checkbox" ng-model="hr" ng-change="perHour=!perHour"> 大成功 <input type="checkbox" ng-model="greatSuccess" ng-change="applys()"></span>        
       </th>
       <th>時間</th>
       <th class="text-primary hand text-center" ng-hide="perHour" ng-click="reverse=!reverse;predicate='-regard[0]'">提督EXP</th>
@@ -60,15 +60,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="item in ensei | orderBy:predicate:reverse">
+    <tr ng-repeat="item in expedition | orderBy:predicate:reverse">
       <td>{{item.id}}</td>
       <td>{{item.name}}</td>
       <td>{{item.time}}</td>
       <td class="text-center" ng-hide="perHour">{{item.regard[0]}}</td>
-      <td class="text-center" ng-hide="perHour">{{item.regard[1]*dskt}}</td>
-      <td class="text-center" ng-hide="perHour">{{item.regard[2]*dskt}}</td>
-      <td class="text-center" ng-hide="perHour">{{item.regard[3]*dskt}}</td>
-      <td class="text-center" ng-hide="perHour">{{item.regard[4]*dskt}}</td>
+      <td class="text-center" ng-hide="perHour">{{item.regard[1]*greatSuccessTime}}</td>
+      <td class="text-center" ng-hide="perHour">{{item.regard[2]*greatSuccessTime}}</td>
+      <td class="text-center" ng-hide="perHour">{{item.regard[3]*greatSuccessTime}}</td>
+      <td class="text-center" ng-hide="perHour">{{item.regard[4]*greatSuccessTime}}</td>
       <td class="text-center" ng-show="perHour">{{item.regardph[0] | number:2}}</td>
       <td class="text-center" ng-show="perHour">{{item.regardph[1] | number:2}}</td>
       <td class="text-center" ng-show="perHour">{{item.regardph[2] | number:2}}</td>

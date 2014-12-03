@@ -88,9 +88,9 @@ angular.module('myApp.filters', [])
 	  return function (items, arr) {
     	var filtered = [];
     	items = items || []
-    	kanSuffix = ['', 'elite', 'flagship', 'brsflagship'];
+    	shipSuffix = ['', 'elite', 'flagship', 'brsflagship'];
     	arr_=arr.map(function(e){
-    		return kanSuffix[e-1];
+    		return shipSuffix[e-1];
     	})
     	items.forEach(function(e) {
     		if(arr_.indexOf(e.api_yomi)!==-1) {

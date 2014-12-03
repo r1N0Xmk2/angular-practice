@@ -24,7 +24,7 @@ angular.module('myApp.services',[])
 		})
 		}
 	})
-	.factory('kanType',function() {
+	.factory('shipType',function() {
 		return [
 			'海防艦', 
 			'駆逐艦', 
