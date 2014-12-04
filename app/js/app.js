@@ -225,6 +225,8 @@ myApp
 		$scope.reverse = false;
 		$scope.typesel = eqType.map(function(e,i){return i+1;});
 		$scope.allType = true;
+		$scope.vrmin = 0;
+		$scope.vrmax = 0;
 		getJson.fetch('EnemyEquipment.json').then(function(data) {
 			$scope.eqs = data.api_mst_slotitem;
 		})
@@ -254,47 +256,45 @@ myApp
 	.controller('vrCtrl', ['$scope', 'getJson', 'eqType', 'toSelectors', function($scope, getJson, eqType, toSelectors) {
 		getJson.fetch('Equipment.json').then(function(data) {
 			$scope.equipments = data.api_mst_slotitem;
-			console.log($scope.equipments)
 			$scope.team = [0,0,0,0,0,0];
 			$scope.admiral = 1;
 			var eqArray = [7,8,9,10,11,12,13,29];
-			$scope.eqs = {}
+			$scope.eqs = {};
+
 			eqArray.forEach(function(e) {
 				$scope.eqs[e] = [
 						{
 							"eqid": -1,
+							"saku": 0,
 							"num": 1
 						}
 					]
 			})
 			$scope.options = {};
-			console.log($scope.eqArray)
 			eqArray.forEach(function(e) {
 				$scope.options[e] = filterEq(e)
 			})
-			console.log($scope.options)
 			$scope.addItem = function(n) {
-				console.log(n)
 				$scope.eqs[n].push({
 					"eqid": -1,
 					"num": 1
 				})
-				console.log($scope.eqs)
 			}
-			var filterEq = function(n) {
-				var selects = ['選擇裝備'];
+			function filterEq (n) {
+				var selects = {};
 				$scope.equipments.forEach(function(e) {
-					if(e.api_type === n) {
-						selects.push(e);
+					if(e.api_type[2] === n && e.api_saku > 0) {
+						selects[e.api_id] = e;
 					}
 				})
 				return selects;
 			}
 			$scope.calvr = function() {
-			console.log($scope.team)
-			var time = 
-			vrmin = $scope.admiral / 5.0;
-			times = {
+			var teams = $scope.team.reduce(function(pre, next) {
+				return pre + Math.sqrt(next)
+			},0)
+			var admiral = $scope.admiral / 5.0;
+			var times = {
 				"7" : [1.0376255,0.09650285],
 				"8" : [1.3677954,0.10863618],
 				"9" : [1.6592780,0.09760553],
@@ -306,6 +306,20 @@ myApp
 				"team" : [1.6841056,0.07815942],
 				"admiral" : [-0.6142467,0.03692224],
 			}
+			$scope.vrmin = Object.keys($scope.eqs).reduce(function(total, e) {
+				return total + $scope.eqs[e].reduce(function(sum, ele) {
+					return sum + ele.saku * ele.num * (times[e][0] - times[e][1]);
+				},0)
+			},0)
+			+ admiral * (times['admiral'][0] - times['admiral'][1])
+			+ teams * (times['team'][0] - times['team'][1]);
+			$scope.vrmax = Object.keys($scope.eqs).reduce(function(total, e) {
+				return total + $scope.eqs[e].reduce(function(sum, ele) {
+					return sum + ele.saku * ele.num * (times[e][0] + times[e][1]);
+				},0)
+			},0)
+			+ admiral * (times['admiral'][0] + times['admiral'][1])
+			+ teams * (times['team'][0] + times['team'][1]);
 			// 索敵スコア[小数点第2位を四捨五入]
 			// 	= 7艦上爆撃機 × (1.0376255 ± 0.09650285)
 			// 	+ 8艦上攻撃機 × (1.3677954 ± 0.10863618)
@@ -319,5 +333,5 @@ myApp
 			// 	+ (司令部レベルを5の倍数に切り上げ) × (-0.6142467 ± 0.03692224)
 		}
 		})
-		
+
 	}]);
