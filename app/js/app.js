@@ -260,7 +260,18 @@ myApp
 			$scope.admiral = 1;
 			var eqArray = [7,8,9,10,11,12,13,29];
 			$scope.eqs = {};
-
+			$scope.times = {
+						"7" : [1.04,0],
+						"8" : [1.37,0],
+						"9" : [1.66,0],
+						"10" : [2.00,0],
+						"11" : [1.78,0],
+						"12" : [1.00,0],
+						"13" : [0.99,0],
+						"29" : [0.91,0],
+						"team" : [1.69,0],
+						"admiral" : [-0.61,0],
+					}
 			eqArray.forEach(function(e) {
 				$scope.eqs[e] = [
 						{
@@ -293,8 +304,8 @@ myApp
 			var teams = $scope.team.reduce(function(pre, next) {
 				return pre + Math.sqrt(next)
 			},0)
-			var admiral = $scope.admiral / 5.0;
-			var times = {
+			var admiral = $scope.admiral + ($scope.admiral % 5===0?0:(5- $scope.admiral % 5));
+			var times2 = {
 				"7" : [1.0376255,0.09650285],
 				"8" : [1.3677954,0.10863618],
 				"9" : [1.6592780,0.09760553],
@@ -305,6 +316,18 @@ myApp
 				"29" : [0.9067950,0.06582838],
 				"team" : [1.6841056,0.07815942],
 				"admiral" : [-0.6142467,0.03692224],
+			}
+			var times = {
+				"7" : [1.04,0],
+				"8" : [1.37,0],
+				"9" : [1.66,0],
+				"10" : [2.00,0],
+				"11" : [1.78,0],
+				"12" : [1.00,0],
+				"13" : [0.99,0],
+				"29" : [0.91,0],
+				"team" : [1.69,0],
+				"admiral" : [-0.61,0],
 			}
 			$scope.vrmin = Object.keys($scope.eqs).reduce(function(total, e) {
 				return total + $scope.eqs[e].reduce(function(sum, ele) {

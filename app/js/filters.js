@@ -1,7 +1,13 @@
 angular.module('myApp.filters', [])
 	.filter('etype', function (eqType) {
 	    return function (n) {
-	      return eqType[n-1];
+	    	if(!isNaN(Number(n))) {
+	    		return eqType[n-1];
+	    	} else if(n == 'team') {
+	    		return '√(全裸舰娘索敌)'
+	    	} else if(n == 'admiral') {
+	    		return '司令部进位至5的倍数'
+	    	}
 	    }
 	})
 	.filter('stype', function (shipType) {

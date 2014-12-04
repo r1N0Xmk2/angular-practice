@@ -13,6 +13,22 @@
   </div>
 </div>
 <div class="row">
+  <table class="table">
+    <tbody>
+      <tr>
+        <th class="text-right">索敌值=</th>
+        <td colspan="2">{{vrmin | number:2}}~{{vrmax | number:2}}</td>
+      </tr>
+      <tr ng-repeat="(key, val) in times">
+        <td class="text-right">+</td>
+        <th>{{key | etype}}</th>
+        <td>*
+        (<input type="number" class="w80" ng-model="val[0]" ng-change="calvr()">
+        ±
+        <input type="number" class="w80" ng-model="val[1]" ng-change="calvr()">)</td>
+      </tr>
+    </tbody>
+  </table>
   <table class="table table-bordered">
     <tbody>
       <tr>
