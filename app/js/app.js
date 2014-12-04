@@ -255,6 +255,7 @@ myApp
 	}])
 	.controller('vrCtrl', ['$scope', 'getJson', 'eqType', 'toSelectors', function($scope, getJson, eqType, toSelectors) {
 		getJson.fetch('Equipment.json').then(function(data) {
+			$scope.editCal = false;
 			$scope.equipments = data.api_mst_slotitem;
 			$scope.team = [0,0,0,0,0,0];
 			$scope.admiral = 1;
@@ -317,32 +318,21 @@ myApp
 				"team" : [1.6841056,0.07815942],
 				"admiral" : [-0.6142467,0.03692224],
 			}
-			var times = {
-				"7" : [1.04,0],
-				"8" : [1.37,0],
-				"9" : [1.66,0],
-				"10" : [2.00,0],
-				"11" : [1.78,0],
-				"12" : [1.00,0],
-				"13" : [0.99,0],
-				"29" : [0.91,0],
-				"team" : [1.69,0],
-				"admiral" : [-0.61,0],
-			}
+			console.log($scope.times)
 			$scope.vrmin = Object.keys($scope.eqs).reduce(function(total, e) {
 				return total + $scope.eqs[e].reduce(function(sum, ele) {
-					return sum + ele.saku * ele.num * (times[e][0] - times[e][1]);
+					return sum + ele.saku * ele.num * ($scope.times[e][0] - $scope.times[e][1]);
 				},0)
 			},0)
-			+ admiral * (times['admiral'][0] - times['admiral'][1])
-			+ teams * (times['team'][0] - times['team'][1]);
+			+ admiral * ($scope.times['admiral'][0] - $scope.times['admiral'][1])
+			+ teams * ($scope.times['team'][0] - $scope.times['team'][1]);
 			$scope.vrmax = Object.keys($scope.eqs).reduce(function(total, e) {
 				return total + $scope.eqs[e].reduce(function(sum, ele) {
-					return sum + ele.saku * ele.num * (times[e][0] + times[e][1]);
+					return sum + ele.saku * ele.num * ($scope.times[e][0] + $scope.times[e][1]);
 				},0)
 			},0)
-			+ admiral * (times['admiral'][0] + times['admiral'][1])
-			+ teams * (times['team'][0] + times['team'][1]);
+			+ admiral * ($scope.times['admiral'][0] + $scope.times['admiral'][1])
+			+ teams * ($scope.times['team'][0] + $scope.times['team'][1]);
 			// 索敵スコア[小数点第2位を四捨五入]
 			// 	= 7艦上爆撃機 × (1.0376255 ± 0.09650285)
 			// 	+ 8艦上攻撃機 × (1.3677954 ± 0.10863618)
