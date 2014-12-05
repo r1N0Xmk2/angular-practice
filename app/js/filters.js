@@ -1,4 +1,4 @@
-angular.module('myApp.filters', [])
+angular.module('KCW.filters', [])
 	.filter('etype', function (eqType) {
 	    return function (n) {
 	    	if(!isNaN(Number(n))) {

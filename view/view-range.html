@@ -4,11 +4,11 @@
       {{key | etype}}
     </div>
     <div class="panel-body" ng-repeat="e in val">
-      <select class="form-control input-sm pull-left w10em" ng-model="e.eqid" ng-options="id as obj.api_name+':'+options[key][id].api_saku for (id, obj) in options[key]" ng-change="e.saku=options[key][e.eqid].api_saku;calvr()"></select>
+      <select class="form-control input-sm pull-left w10em" ng-model="e.eqid" ng-options="id as obj.api_name+':'+options[key][id].api_saku+'鎖敵' for (id, obj) in options[key]" ng-change="e.saku=options[key][e.eqid].api_saku;calvr()"></select>
       <input class="form-control input-sm pull-left w2em" type="number" ng-model="e.num" ng-change="calvr()"> 
     </div>
-    <div class="panel-footer"  ng-click="addItem(key)">
-      +
+    <div class="panel-footer hand text-center"  ng-click="addItem(key)">
+      增加一件裝備
     </div>
   </div>
 </div>
@@ -48,7 +48,7 @@
 <table class="table" ng-show="editCal">
   <tbody>
     <tr>
-      <th class="text-right">索敌值=</th>
+      <th class="text-right">索敌值 = </th>
       <td colspan="2">{{vrmin | number:2}}~{{vrmax | number:2}}</td>
     </tr>
     <tr ng-repeat="(key, val) in times">

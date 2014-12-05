@@ -14,11 +14,11 @@ var data=fs.readFile('./data/Equipment.json', function(err,data){
 						newEq[e.api_id] = {
 							api_name: e.api_name,
 							api_saku: e.api_saku,
-							api_type: getEqTypeName(e.api_type[2])
+							api_type: e.api_type[2]
 						}
 					}
 				})
-				newJson.api_mst_ship = newEq;
+				newJson.api_mst_slotitem = newEq;
 				function getEqTypeName(id) {
 					return type.api_mst_slotitem_equiptype[id].api_name;
 				}
