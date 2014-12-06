@@ -42,7 +42,7 @@
 		<tbody>
 			<tr ng-repeat="ship in ships | filter:'!なし' |afterlv0: shipFinal| filterType:typesel | orderBy:predicate:reverse | filter: query">
 				<td>{{$index+1}}</td>
-				<td>{{ship.api_name}}/{{ship.api_yomi}}|{{ship.api_id}}</td>
+				<td>{{ship.api_name}}/{{ship.api_yomi}}</td>
 				<td class="text-center">{{ship.api_stype | stype}}</td>
 				<td class="text-center">{{ship.api_afterlv | afterlv}}</td>
 				<td class="text-center">{{ship.api_taik[0]}}</td>
