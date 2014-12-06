@@ -21,7 +21,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat-start="(key, val) in improves | orderBy: val.api_type">
+		<tr ng-repeat-start="(key, val) in improves | orderBy: val.api_type | todayImprove:day">
 			<td rowspan="3">{{key}}</td>
 			<td>初期</td>
 			<td rowspan="3">{{val.resources[0]}}</td>
