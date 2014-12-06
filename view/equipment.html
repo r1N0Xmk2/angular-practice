@@ -11,6 +11,8 @@
 	</h3>
 </div>
 <hr>
+	<input type="text" ng-model="query" class="form-control">
+<hr>
 <div class="row">
 	<table class="table table-bordered table-hover">
 		<thead>
@@ -33,9 +35,9 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="eq in eqs | filterEqType:typesel | orderBy:predicate:reverse">
+			<tr ng-repeat="eq in eqs | filterEqType:typesel | orderBy:predicate:reverse | filter:query">
 				<td>{{$index+1}}</td>
-				<td>{{eq.api_name}}</td>
+				<td>{{eq.api_name}}|{{eq.api_id}}</td>
 				<td class="text-center">{{eq.api_type[2] | etype}}</td>
 				<td class="text-center gray">{{eq.api_souk}}</td>
 				<td class="text-center red">{{eq.api_houg}}</td>

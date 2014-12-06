@@ -1,0 +1,56 @@
+<h1 class="text-center">今日改修</h1>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>裝備名</th>
+			<th>改修值</th>
+			<th>燃料</th>
+			<th>弾薬</th>
+			<th>鋼材</th>
+			<th>ボーキ</th>
+			<th>開発資材</th>	
+			<th>改修資材</th>	
+			<th>消費装備</th>
+			<th ng-show="week[0]">副秘书</th>
+			<th ng-show="week[1]">副秘书</th>
+			<th ng-show="week[2]">副秘书</th>
+			<th ng-show="week[3]">副秘书</th>
+			<th ng-show="week[4]">副秘书</th>
+			<th ng-show="week[5]">副秘书</th>
+			<th ng-show="week[6]">副秘书</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat-start="(key, val) in improves | orderBy: val.api_type | todayImprove:day">
+			<td rowspan="3">{{key}}</td>
+			<td>初期</td>
+			<td rowspan="3">{{val.resources[0]}}</td>
+			<td rowspan="3">{{val.resources[1]}}</td>
+			<td rowspan="3">{{val.resources[2]}}</td>
+			<td rowspan="3">{{val.resources[3]}}</td>
+			<td>{{val.materials[0][0].join('/')}}</td>
+			<td>{{val.materials[0][1].join('/')}}</td>
+			<td>{{val.materials[0][2]}}</td>
+			<td ng-show="week[0]" rowspan="3">{{val.week[0]}}</td>
+			<td ng-show="week[1]" rowspan="3">{{val.week[1]}}</td>
+			<td ng-show="week[2]" rowspan="3">{{val.week[2]}}</td>
+			<td ng-show="week[3]" rowspan="3">{{val.week[3]}}</td>
+			<td ng-show="week[4]" rowspan="3">{{val.week[4]}}</td>
+			<td ng-show="week[5]" rowspan="3">{{val.week[5]}}</td>
+			<td ng-show="week[6]" rowspan="3">{{val.week[6]}}</td>
+
+		</tr>
+		<tr>
+			<td>★6</td>
+			<td>{{val.materials[6][0].join('/')}}</td>
+			<td>{{val.materials[6][1].join('/')}}</td>
+			<td>{{val.materials[6][2]}}</td>
+		</tr>
+		<tr ng-repeat-end>
+			<td>★10</td>
+			<td>{{val.materials[10][0].join('/')}}</td>
+			<td>{{val.materials[10][1].join('/')}}</td>
+			<td>{{val.materials[10][2]}}</td>
+		</tr>
+	</tbody>
+</table>

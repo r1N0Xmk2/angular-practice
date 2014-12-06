@@ -8,7 +8,8 @@ var KCW = angular.module('KCW', [
 	'KCW.enemyCtrl',
 	'KCW.eqCtrl',
 	'KCW.eeqCtrl',
-	'KCW.vrCtrl'
+	'KCW.vrCtrl',
+	'KCW.improveCtrl'
 ]);
 KCW
 	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -40,6 +41,10 @@ KCW
 			.when('/view-range', {
 				templateUrl: 'view/view-range.html',
 				controller: 'vrCtrl'
+			})
+			.when('/improvement', {
+				templateUrl: 'view/improvement.html',
+				controller: 'improveCtrl'
 			})
 			.otherwise({
 				redirectTo: '/'

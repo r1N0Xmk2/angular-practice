@@ -85,4 +85,4 @@ angular.module('KCW.services',[])
 			'司令部施設',
 			'航空要員',
 			'高射装置']
-	})
+	});

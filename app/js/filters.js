@@ -94,7 +94,7 @@ angular.module('KCW.filters', [])
 	.filter('filterSuffix', function () {
 	  return function (items, arr) {
     	var filtered = [];
-    	items = items || []
+    	items = items || [];
     	shipSuffix = ['', 'elite', 'flagship', 'brsflagship'];
     	arr_=arr.map(function(e){
     		return shipSuffix[e-1];
@@ -121,4 +121,16 @@ angular.module('KCW.filters', [])
 	  return function (str) {
     	return str.replace(/\<br\>/,'')
 	  };
-	});
+	})
+	.filter('todayImprove', function () {
+		return function (items, day) {
+			var selected = {};
+			items = items || [];
+			Object.keys(items).forEach(function(e) {
+				if(items[e].week[day]!=="不可") {
+					selected[e] = items[e];
+				}
+			})
+			return selected;
+		}
+	})
