@@ -107,6 +107,15 @@ angular.module('KCW.filters', [])
     	return filtered;	
 	  };
 	})
+	.filter('zerotodash', function (){
+		return function (num) {
+			if(num === 0) {
+				return '-'
+			} else {
+				return num
+			}
+		}
+	})
 	.filter('nodash', function () {
 	  return function (str) {
     	return str.replace(/\-/,'')
@@ -133,4 +142,4 @@ angular.module('KCW.filters', [])
 			})
 			return selected;
 		}
-	})
+	});

@@ -18,7 +18,15 @@ angular.module('KCW.shipsCtrl', [])
 		$scope.fuelBull = function(ship) {
 			return ship.api_bull_max + ship.api_fuel_max;
 		}
-
+		$scope.air = function(ship) {
+			if(ship.api_stype!==11&&ship.api_stype!==18&&ship.api_stype!==17&&ship.api_stype!==7) {
+				return 0
+			} else {
+				return ship.api_maxeq.reduce(function(sum, e) {
+					return sum + Math.floor(Math.sqrt(e)*10)
+				},0)
+			}
+		}
 		$scope.shipType = toSelectors(shipType);
 		$scope.filterType = function() {
 			var selects = [];

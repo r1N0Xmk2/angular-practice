@@ -34,7 +34,8 @@
 				<th class="text-center text-primary hand"><span class="text-primary hand"  ng-click="predicate='api_luck[0]';reverse=!reverse">运</span>/<span class="text-primary hand" ng-click="predicate='api_luck[1]';reverse=!reverse">运上限</span></th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_leng';reverse=!reverse">射程</th>
 				<th class="text-center text-primary hand" ng-click="predicate='api_soku';reverse=!reverse">速力</th>
-				<th class="text-center text-primary hand" ng-click="predicate=summaxeq;reverse=!reverse">搭载</th>
+				<th class="hidden-xs hidden-sm text-center text-primary hand" ng-click="predicate=summaxeq;reverse=!reverse">搭载</th>
+				<th class="text-center text-primary hand" ng-click="predicate=air;reverse=!reverse">全烈風</th>
 				<th class="text-center text-primary hand" ><span class="text-primary hand" ng-click="predicate='api_fuel_max';reverse=!reverse">燃</span>/<span class="text-primary hand" ng-click="predicate='api_bull_max';reverse=!reverse">弹</span></th>
 				<th class="text-center text-primary hand" ng-click="predicate=fuelBull;reverse=!reverse">燃+弹</th>
 			</tr>
@@ -42,20 +43,21 @@
 		<tbody>
 			<tr ng-repeat="ship in ships | filter:'!なし' |afterlv0: shipFinal| filterType:typesel | orderBy:predicate:reverse | filter: query">
 				<td>{{$index+1}}</td>
-				<td>{{ship.api_name}}/{{ship.api_yomi}}</td>
+				<td>{{ship.api_name}}<span class="hidden-xs hidden-sm">/{{ship.api_yomi}}</span> </td>
 				<td class="text-center">{{ship.api_stype | stype}}</td>
 				<td class="text-center">{{ship.api_afterlv | afterlv}}</td>
 				<td class="text-center">{{ship.api_taik[0]}}</td>
 				<td class="text-center gray">{{ship.api_souk[1]}}</td>
 				<td class="text-center red">{{ship.api_houg[1]}}</td>
-				<td class="text-center blue">{{ship.api_raig[1]}}</td>
+				<td class="text-center blue">{{ship.api_raig[1] | zerotodash}}</td>
 				<td class="text-center green">{{ship.api_tyku[1]}}</td>
 				<td class="text-center">{{ship.api_luck.join('/')}}</td>
 				<td class="text-center">{{ship.api_leng | leng}}</td>
 				<td class="text-center">{{ship.api_soku | soku}}</td>
-				<td class="text-center">{{ship.api_maxeq | maxeq}}</td>
+				<td class="hidden-xs hidden-sm text-center">{{ship.api_maxeq | maxeq | zerotodash}}</td>
+				<td class="text-center">{{air(ship) | zerotodash}}</td>
 				<td class="text-center">{{ship.api_fuel_max}}/{{ship.api_bull_max}}</td>
-				<td class="text-center">{{ship.api_fuel_max+ship.api_bull_max}}</td>
+				<td class="text-center">{{fuelBull(ship)}}</td>
 			</tr>
 		</tbody>
 	</table>
