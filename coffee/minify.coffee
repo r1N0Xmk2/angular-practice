@@ -43,10 +43,10 @@ getShipsTypeName = (id) ->
 newship = 
 	api_mst_ship: {}
 ship.forEach (e)-> 
-	newship[e.api_id] =
+	newship.api_mst_ship[e.api_id] =
 		api_name: e.api_name
 		api_type: getShipsTypeName(e.api_stype)
-fs.writeFile './data/Ships.min.json', JSON.stringify(newEq), (err) ->
+fs.writeFile './data/Ships.min.json', JSON.stringify(newship), (err) ->
 	if err then throw err 
 	else console.log 'ship fin'
 
@@ -60,6 +60,6 @@ eq.forEach (e) ->
 			api_name: e.api_name
 			api_saku: e.api_saku
 			api_type: e.api_type[2]
-fs.writeFile './data/ViewRange.min.json', JSON.stringify(newEq), (err) ->
+fs.writeFile './data/ViewRange.min.json', JSON.stringify(vr), (err) ->
 	if err then throw err 
 	else console.log 'vr fin'
