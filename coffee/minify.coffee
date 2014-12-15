@@ -6,8 +6,8 @@ newType =
 	api_mst_stype: {}
 equipType2Array = (e) ->
 	arr = []
-	Object.keys(e.api_equip_type).forEach (ele)->
-		if e.api_equip_type[ele] = 1 then arr.push ele
+	for k,v of e.api_equip_type
+		if v is 1 then arr.push k
 	arr
 typeData.api_mst_slotitem_equiptype.forEach (e)->
 	newType.api_mst_slotitem_equiptype[e.api_id] =
@@ -27,7 +27,7 @@ getEqTypeName = (id) ->
 	newType.api_mst_slotitem_equiptype[id].api_name
 newEq = 
 	api_mst_slotitem : {}
-eq.forEach (e) ->
+for e in eq
 	newEq.api_mst_slotitem[e.api_id] = 
 		"api_name": e.api_name
 		"api_type": getEqTypeName e.api_type[2]
@@ -42,7 +42,7 @@ getShipsTypeName = (id) ->
 	newType.api_mst_stype[id].api_name
 newship = 
 	api_mst_ship: {}
-ship.forEach (e)-> 
+for e in ship
 	newship.api_mst_ship[e.api_id] =
 		api_name: e.api_name
 		api_type: getShipsTypeName(e.api_stype)
@@ -54,7 +54,7 @@ fs.writeFile './data/Ships.min.json', JSON.stringify(newship), (err) ->
 #ViewRange.min.json
 vr = 
 	api_mst_slotitem: {}
-eq.forEach (e) ->
+for e in eq
 	if e.api_saku > 0 and e.api_type!= 34
 		vr.api_mst_slotitem[e.api_id] =
 			api_name: e.api_name

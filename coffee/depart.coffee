@@ -21,28 +21,28 @@ newKc['EnemyEquipment'][part['EnemyEquipment']] = []
 newKc['Type'][part['Type'][0]] = []
 newKc['Type'][part['Type'][1]] = []
 
-kc[part['Ships']].forEach (e) ->
+for e in kc[part['Ships']]
 	if e.api_id < 501 
 		newKc['Ships'][part['Ships']].push e
 
-kc[part['Enemy']].forEach (e) ->
+for e in kc[part['Enemy']]
 	if e.api_id >= 501
 		if '改' in e.api_name then e.api_yomi = 'brsflagship'
 		newKc['Enemy'][part['Enemy']].push e
 
-kc[part['Equipment']].forEach (e) ->
+for e in kc[part['Equipment']]
 	if e.api_id < 501
 		newKc['Equipment'][part['Equipment']].push e
 
-kc[part['EnemyEquipment']].forEach (e) ->
+for e in kc[part['EnemyEquipment']]
 	if e.api_id >= 501
 		newKc['EnemyEquipment'][part['EnemyEquipment']].push e
 
-kc[part['Type'][0]].forEach (e) ->
+for e in kc[part['Type'][0]]
 	newKc['Type'][part['Type'][0]].push e
 
-kc[part['Type'][1]].forEach (e) ->
+for e in kc[part['Type'][1]]
 	newKc['Type'][part['Type'][1]].push e
 
-Object.keys(part).forEach (e) ->
-	fs.writeFile 'data/' + e + '.json', JSON.stringify newKc[e] 
+for k,v of part
+	fs.writeFile 'data/' + k + '.json', JSON.stringify newKc[k] 
