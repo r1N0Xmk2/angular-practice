@@ -23,8 +23,8 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			js: {
-				files: ['app/scripts/src/*.js','app/scripts/src/controllers/*.js'],
-				tasks: ['concat', 'uglify']
+				files: ['app/scripts/src/*.coffee','app/scripts/src/controllers/*.coffee'],
+				tasks: ['coffee', 'uglify']
 			}
 		}
 	});

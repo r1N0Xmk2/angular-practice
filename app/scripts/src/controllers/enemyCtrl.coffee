@@ -7,9 +7,7 @@ KCW.controller "enemyCtrl", [
   ($scope, $filter, getJson, shipType, toSelectors) ->
     $scope.predicate = "api_stype"
     $scope.reverse = false
-    $scope.typesel = shipType.map((e, i) ->
-      i + 1
-    )
+    $scope.typesel = [1..shipType.length]
     $scope.shipFinal = true
     $scope.allType = true
     shipSuffix = [
@@ -19,9 +17,7 @@ KCW.controller "enemyCtrl", [
       "改flagship"
     ]
     $scope.shipSuffix = toSelectors(shipSuffix)
-    $scope.suffixsel = shipSuffix.map((e, i) ->
-      i + 1
-    )
+    $scope.suffixsel = [1..shipSuffix.length]
     getJson.fetch("Enemy.json").then (data) ->
       $scope.ships = data.api_mst_ship
       return
@@ -37,10 +33,8 @@ KCW.controller "enemyCtrl", [
     $scope.shipType = toSelectors(shipType)
     $scope.filterType = ->
       selects = []
-      $scope.shipType.forEach (e) ->
+      for e in $scope.shipType
         selects.push e.val  if e.selected is true
-        return
-
       $scope.typesel = selects
       if $scope.typesel.length is 0
         $scope.allType = false
@@ -49,19 +43,15 @@ KCW.controller "enemyCtrl", [
 
     $scope.toggleType = ->
       $scope.typesel = []
-      $scope.shipType.forEach (e) ->
+      for e in $scope.shipType
         e.selected = $scope.allType
-        return
-
       $scope.filterType()
       return
 
     $scope.filterSuffix = ->
       selects = []
-      $scope.shipSuffix.forEach (e) ->
-        selects.push e.val  if e.selected is true
-        return
-
+      for e in $scope.shipSuffix
+         selects.push e.val  if e.selected is true
       $scope.suffixsel = selects
       return
 ]

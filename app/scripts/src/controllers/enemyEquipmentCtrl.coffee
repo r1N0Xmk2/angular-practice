@@ -7,9 +7,7 @@ KCW.controller "eeqCtrl", [
   ($scope, $filter, getJson, eqType, toSelectors) ->
     $scope.predicate = "api_type"
     $scope.reverse = false
-    $scope.typesel = eqType.map((e, i) ->
-      i + 1
-    )
+    $scope.typesel = [1..eqType.length]
     $scope.allType = true
     $scope.vrmin = 0
     $scope.vrmax = 0
@@ -32,10 +30,8 @@ KCW.controller "eeqCtrl", [
 
     $scope.toggleType = ->
       $scope.typesel = []
-      $scope.eqType.forEach (e) ->
+      for e in $scope.eqType
         e.selected = $scope.allType
-        return
-
       $scope.filterType()
       return
 ]

@@ -18,10 +18,8 @@ KCW.controller "eqCtrl", [
     $scope.eqType = toSelectors(eqType)
     $scope.filterType = ->
       selects = []
-      $scope.eqType.forEach (e) ->
+      for e in $scope.eqType
         selects.push e.val  if e.selected is true
-        return
-
       $scope.typesel = selects
       if $scope.typesel.length is 0
         $scope.allType = false
@@ -30,10 +28,8 @@ KCW.controller "eqCtrl", [
 
     $scope.toggleType = ->
       $scope.typesel = []
-      $scope.eqType.forEach (e) ->
+      for e in $scope.eqType
         e.selected = $scope.allType
-        return
-
       $scope.filterType()
       return
 ]
