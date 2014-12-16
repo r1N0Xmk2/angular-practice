@@ -1,4 +1,4 @@
-angular.module('KCW.eeqCtrl', [])
+KCW
 	.controller('eeqCtrl', ['$scope', '$filter', 'getJson', 'eqType', 'toSelectors', function($scope, $filter, getJson, eqType, toSelectors) {
 		$scope.predicate = 'api_type';
 		$scope.reverse = false;

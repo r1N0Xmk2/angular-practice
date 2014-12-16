@@ -1,4 +1,4 @@
-angular.module('KCW.shipsCtrl', [])
+KCW
 	.controller('shipsCtrl', ['$scope', '$filter', 'getJson', 'shipType', 'toSelectors', function($scope, $filter, getJson, shipType, toSelectors) {
 		$scope.predicate = 'api_stype';
 		$scope.reverse = false;

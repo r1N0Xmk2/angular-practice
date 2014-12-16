@@ -1,4 +1,4 @@
-angular.module('KCW.improveCtrl', [])
+KCW
 	.controller('improveCtrl', ['$scope', 'getJson', 'toSelectors', function($scope, getJson, toSelectors) {
 		var d = new Date();
 		localTime = d.getTime(); 

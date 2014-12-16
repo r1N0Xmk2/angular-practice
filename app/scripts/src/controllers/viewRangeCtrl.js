@@ -1,4 +1,4 @@
-angular.module('KCW.vrCtrl', [])
+KCW
 	.controller('vrCtrl', ['$scope', 'getJson', 'eqType', 'toSelectors', function($scope, getJson, eqType, toSelectors) {
 		getJson.fetch('ViewRange.min.json').then(function(data) {
 			// 索敵スコア[小数点第2位を四捨五入]

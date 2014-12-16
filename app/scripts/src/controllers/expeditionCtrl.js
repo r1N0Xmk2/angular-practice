@@ -1,4 +1,4 @@
-angular.module('KCW.expeditionCtrl', [])
+KCW
 	.controller('expeditionCtrl', ['$scope', 'getJson', function($scope, getJson) {
 		$scope.perHour = false;
 		$scope.greatSuccessTime = $scope.greatSuccess==true?1.5:1;

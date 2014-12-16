@@ -1,4 +1,4 @@
-angular.module('KCW.services',[])
+KCW
 	.factory('getJson', function($q, $timeout, $http) {
 		var getJson = {
 			fetch: function(what) {

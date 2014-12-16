@@ -1,15 +1,5 @@
 var KCW = angular.module('KCW', [
-	'ngRoute',
-	'KCW.services',
-	'KCW.filters',
-	'KCW.mainCtrl',
-	'KCW.expeditionCtrl',
-	'KCW.shipsCtrl',
-	'KCW.enemyCtrl',
-	'KCW.eqCtrl',
-	'KCW.eeqCtrl',
-	'KCW.vrCtrl',
-	'KCW.improveCtrl'
+	'ngRoute'
 ]);
 KCW
 	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -49,4 +39,4 @@ KCW
 			.otherwise({
 				redirectTo: '/'
 			});
-	}])
+	}]);

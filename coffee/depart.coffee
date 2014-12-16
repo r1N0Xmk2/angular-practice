@@ -1,5 +1,5 @@
 fs = require 'fs'
-fileName = if process.argv[2] is undefined then '../data/kc-2014-12-1.json' else './' + process.argv[2]
+fileName = if process.argv[2] is undefined then '../data/kc-2014-12-1.json' else '../' + process.argv[2]
 console.log fileName
 kc = require fileName
 part = 
