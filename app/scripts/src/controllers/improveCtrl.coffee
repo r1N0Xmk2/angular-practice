@@ -13,9 +13,7 @@ KCW.controller "improveCtrl", [
       else if typeof (obj) is "number"
         arr[obj].api_name
       else if Array.isArray(obj)
-        obj.map((e) ->
-          arr[e].api_name
-        ).join " 或 "
+        (arr[e].api_name for e in obj).join " 或 "
     getItem = (obj, arr) ->
       if obj[1] is 0
         "无"
@@ -30,7 +28,7 @@ KCW.controller "improveCtrl", [
     $scope.day = new Date(tokyo).getDay()
     $scope.week = []
     i = 0
-
+    
     while i < 7
       if i is $scope.day
         $scope.week[i] = true
@@ -41,18 +39,15 @@ KCW.controller "improveCtrl", [
       getJson.fetch("Ships.min.json").then (ships) ->
         getJson.fetch("Equipment.min.json").then (equip) ->
           $scope.improves = {}
-          Object.keys(data.improvement).forEach (ele) ->
-            $scope.improves[equip.api_mst_slotitem[ele].api_name] = data.improvement[ele]
-            $scope.improves[equip.api_mst_slotitem[ele].api_name].api_type = equip.api_mst_slotitem[ele].api_type
-            Object.keys($scope.improves[equip.api_mst_slotitem[ele].api_name].materials).forEach (e) ->
-              $scope.improves[equip.api_mst_slotitem[ele].api_name].materials[e][2] = getItem($scope.improves[equip.api_mst_slotitem[ele].api_name].materials[e][2], equip.api_mst_slotitem)  if typeof ($scope.improves[equip.api_mst_slotitem[ele].api_name].materials[e]) isnt "number"
-              return
-
-            $scope.improves[equip.api_mst_slotitem[ele].api_name].week.forEach (e, i, arr) ->
-              arr[i] = getShipName(e, ships.api_mst_ship)
-              return
-
-            return
+          
+          for key, val of data.improvement
+            ea = equip.api_mst_slotitem[key]
+            $scope.improves[ea.api_name] = val
+            $scope.improves[ea.api_name].api_type = ea.api_type
+            for k, v of $scope.improves[ea.api_name].materials
+              v[2] = getItem(v[2], equip.api_mst_slotitem)  if typeof (v) isnt "number"
+            for e, i in $scope.improves[ea.api_name].week
+              $scope.improves[ea.api_name].week[i] = getShipName(e, ships.api_mst_ship)
 
           return
 

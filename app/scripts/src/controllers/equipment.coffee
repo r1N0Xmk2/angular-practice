@@ -7,9 +7,7 @@ KCW.controller "eqCtrl", [
   ($scope, $filter, getJson, eqType, toSelectors) ->
     $scope.predicate = "api_type"
     $scope.reverse = false
-    $scope.typesel = eqType.map((e, i) ->
-      i + 1
-    )
+    $scope.typesel = [1..eqType.length]
     $scope.allType = true
     getJson.fetch("Equipment.json").then (data) ->
       $scope.eqs = data.api_mst_slotitem

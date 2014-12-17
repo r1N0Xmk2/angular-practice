@@ -58,27 +58,23 @@ KCW.filter("etype", (eqType) ->
     return items  unless flag
     filtered = []
     items = items or []
-    items.forEach (e) ->
+    for e in items
       filtered.push e  if e.api_afterlv is 0
-      return
-
     filtered
 ).filter("filterType", ->
   (items, arr) ->
     if items
       filtered = []
-      items.forEach (e) ->
+      for e in items
         filtered.push e  if arr.indexOf(e.api_stype) isnt -1
-        return
 
       filtered
 ).filter("filterEqType", ->
   (items, arr) ->
     if items
       filtered = []
-      items.forEach (e) ->
+      for e in items
         filtered.push e  if arr.indexOf(e.api_type[2]) isnt -1
-        return
 
       filtered
 ).filter("filterSuffix", ->
@@ -91,12 +87,9 @@ KCW.filter("etype", (eqType) ->
       "flagship"
       "brsflagship"
     ]
-    arr_ = arr.map((e) ->
-      shipSuffix[e - 1]
-    )
-    items.forEach (e) ->
+    arr_ = (shipSuffix[e - 1] for e in arr)
+    for e in items
       filtered.push e  if arr_.indexOf(e.api_yomi) isnt -1
-      return
 
     filtered
 ).filter("zerotodash", ->
@@ -118,8 +111,6 @@ KCW.filter("etype", (eqType) ->
   (items, day) ->
     selected = {}
     items = items or []
-    Object.keys(items).forEach (e) ->
-      selected[e] = items[e]  if items[e].week[day] isnt "不可"
-      return
-
+    for k, v of items
+      selected[k] = v if v.week[day] isnt "不可"
     selected

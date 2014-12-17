@@ -10,12 +10,9 @@ KCW.controller "expeditionCtrl", [
       (get - cost) / min
     calph = ->
       expeditionOp = []
-      $scope.expedition.forEach (item, index) ->
+      for item, index in  $scope.expedition
         item.regardph = JSON.parse(JSON.stringify(item.regard))
-        item.regardph = item.regardph.map((e, i) ->
-          expeditionCalculate item, i, $scope.greatSuccessTime
-        )
-        return
+        item.regardph = (expeditionCalculate item, i, $scope.greatSuccessTime for e,i in item.regardph)
 
       return
     $scope.perHour = false
@@ -35,17 +32,7 @@ KCW.controller "expeditionCtrl", [
 
       calph()
       $scope.predicate = "id"
-      $scope.expedition1 = expeditionOp.map((e) ->
-        e
-      )
-      $scope.expedition2 = expeditionOp.map((e) ->
-        e
-      )
-      $scope.expedition3 = expeditionOp.map((e) ->
-        e
-      )
-      
-      # $scope.totalF = $scope.totalA = $scope.totalS = $scope.totalB = 0;
+      $scope.expedition1 =  $scope.expedition2 = $scope.expedition3 = (e for e in expeditionOp)
       $scope.total = [
         0
         0

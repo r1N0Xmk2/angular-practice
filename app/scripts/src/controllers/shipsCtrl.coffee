@@ -47,10 +47,8 @@ KCW.controller "shipsCtrl", [
 
     $scope.toggleType = ->
       $scope.typesel = []
-      $scope.shipType.forEach (e) ->
+      for e in $scope.shipType
         e.selected = $scope.allType
-        return
-
       $scope.filterType()
       return
 ]

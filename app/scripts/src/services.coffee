@@ -13,6 +13,8 @@ KCW.factory("getJson", ($q, $timeout, $http) ->
   getJson
 ).factory("toSelectors", ->
   (arr) ->
+    (name: e,val: i + 1,selected: true for e,i in arr)
+
     arr.map (e, i) ->
       name: e
       val: i + 1
