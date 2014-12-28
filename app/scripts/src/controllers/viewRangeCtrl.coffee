@@ -32,7 +32,7 @@ KCW.controller "vrCtrl", [
         13: [0.99,0]
         29: [0.91,0]
         team: [1.69,0]
-        admiral: [0.61,0]
+        admiral: [-0.61,0]
 
       longTimes =
         7: [1.0376255,0.09650285]
